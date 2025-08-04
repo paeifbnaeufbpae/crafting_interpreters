@@ -1,0 +1,16 @@
+// print the first 21 elements of the Fibonacci sequence
+
+var a = 0;
+var temp;
+
+{
+  var b = 1;
+  while (a < 10000) {
+    {
+      print a;
+      temp = a;
+      a = b;
+    }
+    b = temp + b;
+  }
+}

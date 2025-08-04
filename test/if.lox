@@ -1,0 +1,7 @@
+var i = 1000;
+
+if (i < 1000) {
+  print "not that huge";
+} else {
+  print "rather big";
+}
