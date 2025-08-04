@@ -1,6 +1,6 @@
 package lox;
 
-public class RuntimeError extends RuntimeException {
+class RuntimeError extends RuntimeException {
   final Token token;
 
   RuntimeError(

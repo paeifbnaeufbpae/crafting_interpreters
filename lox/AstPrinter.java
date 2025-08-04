@@ -5,7 +5,7 @@ import lox.Expr.Grouping;
 import lox.Expr.Literal;
 import lox.Expr.Unary;
 
-public class AstPrinter implements Expr.Visitor<String> {
+class AstPrinter implements Expr.Visitor<String> {
   String print(Expr expr) {
     return expr.accept(this);
   }

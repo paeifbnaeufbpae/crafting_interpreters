@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Scanner {
+class Scanner {
   private final String source;
   private final List<Token> tokens = new ArrayList<>();
   private int start = 0;
