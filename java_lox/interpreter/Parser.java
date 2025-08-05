@@ -1,4 +1,4 @@
-package jlox.source;
+package interpreter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

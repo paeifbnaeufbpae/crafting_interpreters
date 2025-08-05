@@ -1,9 +1,9 @@
-package jlox.source;
+package interpreter;
 
-import jlox.source.Expr.Binary;
-import jlox.source.Expr.Grouping;
-import jlox.source.Expr.Literal;
-import jlox.source.Expr.Unary;
+import interpreter.Expr.Binary;
+import interpreter.Expr.Grouping;
+import interpreter.Expr.Literal;
+import interpreter.Expr.Unary;
 
 class AstPrinter implements Expr.Visitor<String> {
   String print(Expr expr) {

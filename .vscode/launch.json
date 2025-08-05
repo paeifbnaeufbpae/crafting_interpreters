@@ -8,7 +8,7 @@
       "name": "(lldb) Launch",
       "type": "cppdbg",
       "request": "launch",
-      "program": "cloc/main.out",
+      "program": "c_lox/main.out",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",

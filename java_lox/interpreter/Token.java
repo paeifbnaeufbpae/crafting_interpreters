@@ -1,4 +1,4 @@
-package jlox.source;
+package interpreter;
 
 class Token {
   final TokenType type;

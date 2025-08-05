@@ -13,7 +13,7 @@
         "main.out"
       ],
       "options": {
-        "cwd": "${workspaceFolder}/cloc"
+        "cwd": "${workspaceFolder}/c_lox"
       },
       "problemMatcher": [
         "$gcc"

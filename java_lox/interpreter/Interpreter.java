@@ -1,23 +1,23 @@
-package jlox.source;
+package interpreter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jlox.source.Expr.Assign;
-import jlox.source.Expr.Binary;
-import jlox.source.Expr.Call;
-import jlox.source.Expr.Get;
-import jlox.source.Expr.Grouping;
-import jlox.source.Expr.Literal;
-import jlox.source.Expr.Logical;
-import jlox.source.Expr.Set;
-import jlox.source.Expr.Super;
-import jlox.source.Expr.This;
-import jlox.source.Expr.Unary;
-import jlox.source.Expr.Variable;
-import jlox.source.Stmt.Class;
+import interpreter.Expr.Assign;
+import interpreter.Expr.Binary;
+import interpreter.Expr.Call;
+import interpreter.Expr.Get;
+import interpreter.Expr.Grouping;
+import interpreter.Expr.Literal;
+import interpreter.Expr.Logical;
+import interpreter.Expr.Set;
+import interpreter.Expr.Super;
+import interpreter.Expr.This;
+import interpreter.Expr.Unary;
+import interpreter.Expr.Variable;
+import interpreter.Stmt.Class;
 
 class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 

@@ -3,7 +3,7 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/cloc/**"
+                "${workspaceFolder}/c_lox/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
