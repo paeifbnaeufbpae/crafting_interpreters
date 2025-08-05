@@ -1,4 +1,4 @@
-package lox;
+package jlox.source;
 
 class RuntimeError extends RuntimeException {
   final Token token;

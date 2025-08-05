@@ -1,4 +1,4 @@
-package lox;
+package jlox.source;
 
 class Return extends RuntimeException {
   final Object value;

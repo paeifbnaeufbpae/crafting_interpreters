@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "build main.c",
+      "command": "/usr/bin/clang",
+      "args": [
+        "-fcolor-diagnostics",
+        "-fansi-escape-codes",
+        "-g",
+        "*.c",
+        "-o",
+        "main.out"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/cloc"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+    }
+  ],
+  "version": "2.0.0"
+}
