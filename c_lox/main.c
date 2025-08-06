@@ -51,7 +51,7 @@ static char *readFile(const char *path) {
   );
 
   if (buffer == NULL) {
-    fprintf(stderr, "could not read file \"%s\"\n");
+    fprintf(stderr, "could not read file \"%s\"\n", path);
     exit(74);
   }
 
