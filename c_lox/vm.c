@@ -39,10 +39,12 @@ void initVM() {
 
   vm.objects = NULL;
 
+  initTable(&vm.globals);
   initTable(&vm.strings);
 }
 
 void freeVM() {
+  freeTable(&vm.globals);
   freeTable(&vm.strings);
   freeObjects();
 }
@@ -100,8 +102,15 @@ static void concatenate() {
 
 static InterpretResult run() {
 
+// read a byte and advance the instruction pointer
 #define READ_BYTE() (*vm.ip++)
+
+// next is an index for a constant
 #define READ_CONSTANT() (vm.chunk->constants.values[READ_BYTE()])
+
+// next is an index for a constant that's a string object
+#define READ_STRING() AS_STRING(READ_CONSTANT())
+
 #define BINARY_OP(valueType, op) \
   do { \
     if ( \
@@ -159,6 +168,61 @@ static InterpretResult run() {
       case OP_TRUE: push(BOOL_VAL(true)); break;
       case OP_FALSE: push(BOOL_VAL(false)); break;
 
+      case OP_POP: pop(); break;
+
+      case OP_GET_GLOBAL: {
+        ObjString *name = READ_STRING();
+        Value value;
+
+        if (!tableGet(
+          &vm.globals,
+          name,
+          &value
+        )) {
+          runtimeError("undefined variable '%s'", name->chars);
+          return INTERPRET_RUNTIME_ERROR;
+        }
+
+        push(value);
+
+        break;
+      }
+
+      case OP_DEFINE_GLOBAL: {
+        ObjString *name = READ_STRING();
+
+        tableSet(
+          &vm.globals,
+          name,
+          peek(0)
+        );
+
+        // pop after the above statement so that the vm can find the the value (when gc'ing) even if we're in the middle of adding it to the hash table
+        pop();
+
+        break;
+      }
+
+      case OP_SET_GLOBAL: {
+        ObjString *name = READ_STRING();
+
+        // couldn't we just have a `tableHas` that just checks whether it's there instead of inserting and then deleting right after when we have an undefined variable?
+
+        if (tableSet(
+          &vm.globals,
+          name,
+          peek(0)
+        )) {
+          tableDelete(&vm.globals, name);
+          
+          runtimeError("undefined variable '%s'", name->chars);
+
+          return INTERPRET_RUNTIME_ERROR;
+        }
+
+        break;
+      }
+
       case OP_EQUAL: {
         Value b = pop();
         Value a = pop();
@@ -207,9 +271,14 @@ static InterpretResult run() {
 
         break;
 
-      case OP_RETURN: {
+      case OP_PRINT: {
         printValue(pop());
         printf("\n");
+        break;
+      }
+
+      case OP_RETURN: {
+        // exit interpreter
         return INTERPRET_OK;
       }
     }
@@ -217,6 +286,7 @@ static InterpretResult run() {
 
 #undef READ_BYTE
 #undef READ_CONSTANT
+#undef READ_STRING
 #undef BINARY_OP
 
 }

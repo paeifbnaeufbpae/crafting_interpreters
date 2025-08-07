@@ -92,6 +92,7 @@ ObjString *takeString(
   return allocateString(chars, length, hash);
 }
 
+// take a slice of a string and return the (possibly new) interned string object for it
 ObjString *copyString(
   const char *chars,
   int length

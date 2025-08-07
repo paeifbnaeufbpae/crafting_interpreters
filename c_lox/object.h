@@ -4,11 +4,16 @@
 #include "common.h"
 #include "value.h"
 
+// assume a value is an object and get its type
 #define OBJ_TYPE(value) (AS_OBJ(value)->type)
 
+// is the value a string object?
 #define IS_STRING(value) isObjType(value, OBJ_STRING)
 
+// assume a value is a string object
 #define AS_STRING(value) ((ObjString *)AS_OBJ(value))
+
+// assume a value is a string object and then access its char array
 #define AS_CSTRING(value) (((ObjString *)AS_OBJ(value))->chars)
 
 typedef enum {

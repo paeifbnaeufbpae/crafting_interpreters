@@ -67,12 +67,12 @@ void writeChunk(
   chunk->count++;
 }
 
+// returns the index in the constants table of the appended constant
 int addConstant(
   Chunk *chunk,
   Value value
 ) {
   writeValueArray(&chunk->constants, value);
 
-  // return the index of the appended constant
   return chunk->constants.count - 1;
 }

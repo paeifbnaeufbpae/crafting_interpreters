@@ -17,6 +17,9 @@ typedef struct {
   Value stack[STACK_MAX];
   Value *stackTop; // exclusive (one after the last element)
 
+  // global variable table
+  Table globals;
+
   // interned strings (hash set)
   Table strings;
 

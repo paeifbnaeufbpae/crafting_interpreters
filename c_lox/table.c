@@ -71,6 +71,7 @@ static Entry *findEntry(
   }
 }
 
+// returns if found or not (has)
 bool tableGet(
   Table *table,
   ObjString *key,
@@ -144,6 +145,7 @@ static void adjustCapacity(
   table->capacity = capacity;
 }
 
+// returns true for inserts and false for updates
 bool tableSet(
   Table *table,
   ObjString *key,
