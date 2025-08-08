@@ -41,7 +41,26 @@ typedef struct {
   Precedence precedence;
 } ParseRule;
 
+typedef struct {
+  Token name;
+  int depth;
+} Local;
+
+typedef struct {
+  // all locals that are in scope (source order)
+  Local locals[UINT8_COUNT];
+
+  // how many slots in the above array are in use
+  int localCount;
+
+  // number of blocks we are currently surrounded by
+  int scopeDepth;
+
+  // number variables with the level of nesting where they appear => track which block each local belongs to so that we know WHICH LOCALS TO DISCARD WHEN A BLOCK ENDS (exactly my problem)
+} Compiler;
+
 Parser parser;
+Compiler *current = NULL;
 Chunk *compilingChunk;
 
 static Chunk *currentChunk() {
@@ -149,6 +168,12 @@ static uint8_t makeConstant(Value value) {
 
 static void emitConstant(Value value) {
   emitBytes(OP_CONSTANT, makeConstant(value));
+}
+
+static void initCompiler(Compiler *compiler) {
+  compiler->localCount = 0;
+  compiler->scopeDepth = 0;
+  current = compiler;
 }
 
 static void endCompiler() {
@@ -436,6 +461,9 @@ bool compile(
   Chunk *chunk
 ) {
   initScanner(source);
+
+  Compiler compiler;
+  initCompiler(&compiler);
 
   compilingChunk = chunk;
 
