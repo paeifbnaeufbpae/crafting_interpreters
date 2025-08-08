@@ -426,6 +426,11 @@ static int resolveLocal(
       name,
       &local->name
     )) {
+
+      if (local->depth == -1) {
+        error("can't read local variable in its own initializer");
+      }
+
       return i;
     }
   }
@@ -441,8 +446,9 @@ static void addLocal(Token name) {
   }
 
   Local *local = &current->locals[current->localCount++];
+
   local->name = name;
-  local->depth = current->scopeDepth;
+  local->depth = -1;
 }
 
 static void declareVariable() {
@@ -481,8 +487,13 @@ static uint8_t parseVariable(const char *errorMessage) {
   return identifierConstant(&parser.previous);
 }
 
+static void markInitialized() {
+  current->locals[current->localCount - 1].depth = current->scopeDepth;
+}
+
 static void defineVariable(uint8_t global) {
   if (current->scopeDepth > 0) {
+    markInitialized();
     return;
   }
 
