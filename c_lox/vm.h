@@ -14,6 +14,7 @@ typedef struct {
   // points to the *next* instruction, not the current one
   uint8_t *ip;
 
+  // the value stack
   Value stack[STACK_MAX];
   Value *stackTop; // exclusive (one after the last element)
 
