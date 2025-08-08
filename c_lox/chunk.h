@@ -25,12 +25,18 @@ typedef enum {
   OP_NOT,
   OP_NEGATE,
   OP_PRINT,
+  OP_JUMP,
+  OP_JUMP_IF_FALSE,
+  OP_LOOP,
   OP_RETURN,
 } OpCode;
 
 // dynamic array, i.e. vector
 typedef struct {
+  // number of bytes currently in this chunk
   int count;
+
+  // the current maximum number of bytes for this chunk
   int capacity;
 
   // pointer to the start of the data (bytes)
@@ -39,6 +45,7 @@ typedef struct {
   // parallel line array
   int *lines;
 
+  // this chunk's constants table
   ValueArray constants;
 } Chunk;
 
