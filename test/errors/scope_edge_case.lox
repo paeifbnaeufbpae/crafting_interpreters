@@ -1,0 +1,9 @@
+// chapter 22
+
+{
+  var a = "outer";
+  {
+    var a = a; // this refers to itself, not to the outer `a`
+    print a;
+  }
+}

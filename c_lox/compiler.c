@@ -86,7 +86,7 @@ static void errorAt(
   } else if (token->type == TOKEN_ERROR) {
     // nothing
   } else {
-    fprintf(stderr, "at '%.*s'", token->length, token->start);
+    fprintf(stderr, " at '%.*s'", token->length, token->start);
   }
 
   fprintf(stderr, ": %s\n", message);
@@ -216,6 +216,7 @@ static void statement();
 static void declaration();
 static ParseRule *getRule(TokenType type);
 static void parsePrecedence(Precedence precedence);
+static int resolveLocal(Compiler *compiler, Token *name);
 
 // don't know why this is not in the book, maybe i made some mistake... but it's necessary
 static uint8_t identifierConstant(Token *name);
