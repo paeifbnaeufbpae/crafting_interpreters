@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ -z "$1" ]; then
+  echo "Usage: $0 chapter_name"
+  exit 1
+fi
+
+cd ../book || exit
+dart tool/bin/test.dart "$1" -i ../c_lox/main.out

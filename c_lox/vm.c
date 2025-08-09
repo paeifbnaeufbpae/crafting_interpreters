@@ -121,7 +121,7 @@ static InterpretResult run() {
       !IS_NUMBER(peek(0)) || \
       !IS_NUMBER(peek(1)) \
     ) { \
-      runtimeError("operands must be numbers"); \
+      runtimeError("Operands must be numbers."); \
       return INTERPRET_RUNTIME_ERROR; \
     } \
     \
@@ -195,7 +195,7 @@ static InterpretResult run() {
           name,
           &value
         )) {
-          runtimeError("undefined variable '%s'", name->chars);
+          runtimeError("Undefined variable '%s'.", name->chars);
           return INTERPRET_RUNTIME_ERROR;
         }
 
@@ -231,7 +231,7 @@ static InterpretResult run() {
         )) {
           tableDelete(&vm.globals, name);
           
-          runtimeError("undefined variable '%s'", name->chars);
+          runtimeError("Undefined variable '%s'.", name->chars);
 
           return INTERPRET_RUNTIME_ERROR;
         }
@@ -263,7 +263,7 @@ static InterpretResult run() {
           double a = AS_NUMBER(pop());
           push(NUMBER_VAL(a + b));
         } else {
-          runtimeError("operands must be two numbers or two strings");
+          runtimeError("Operands must be two numbers or two strings.");
           return INTERPRET_RUNTIME_ERROR;
         }
         break;
@@ -279,7 +279,7 @@ static InterpretResult run() {
 
       case OP_NEGATE:
         if (!IS_NUMBER(peek(0))) {
-          runtimeError("operand must be a number");
+          runtimeError("Operand must be a number.");
           return INTERPRET_RUNTIME_ERROR;
         }
 
